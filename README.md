@@ -22,7 +22,7 @@
   
   Вес всех файлов после минификаций:
 
-  <picture><img src="assets/img.png"></picture>
+  <picture><img src="img/size.png"></picture>
 
 
 <!-- Окончание -->
