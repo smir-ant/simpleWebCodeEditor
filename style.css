@@ -1,0 +1,56 @@
+* {
+    box-sizing: border-box  ;
+}
+
+.container {
+    position: relative;
+    width: fit-content;
+}
+
+.code {
+    resize: none;
+    width: 500px;
+    height: 150px;
+
+    margin: 0;
+    padding: 15px;
+    line-height: 1.5rem;
+    font-size: 1.25rem;
+
+    background: transparent;
+    position: relative;
+}
+
+/* невимая часть, которая всё подсвечивает находясь над textarea */
+.mirror {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    pointer-events: none;
+
+    & .comment {
+        color: grey;
+    }
+
+    & .string {
+        color: green;
+    }
+
+    & .keyword {
+        color:dodgerblue;
+    }
+
+    & .function {
+        color:sandybrown;
+    }
+
+    & .variable {}
+    & .punctuation {}
+    & .number {}
+    & .operator {}
+    & .boolean {}
+}
