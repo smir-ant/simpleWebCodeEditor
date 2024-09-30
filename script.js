@@ -1,5 +1,9 @@
+/* 
+подсветка sql кода самодельная
+*/
+
 document.addEventListener('DOMContentLoaded', () => {
-    const textarea = document.getElementById('textarea');
+    const textarea = document.getElementById('codeInput');
     const container = document.getElementById('container');
     
     const mirror = document.createElement('pre');
@@ -9,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Функция копирования стилей
     const copyStyles = () => {
         const styles = window.getComputedStyle(textarea);
-        ['border', 'fontFamily', 'fontSize', 'fontWeight', 'lineHeight', 'padding', 'margin', 'whiteSpace', 'wordWrap']
+        ['border', 'fontFamily', 'fontSize', 'fontWeight', 'lineHeight', 'padding', 'borderRadius', 'wordWrap', 'whiteSpace']
             .forEach((prop) => mirror.style[prop] = styles[prop]);
         mirror.style.borderColor = 'transparent';
     };
@@ -122,8 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Подписка на события
     textarea.addEventListener('input', syncMirror);
-    textarea.addEventListener('scroll', () => mirror.scrollTop = textarea.scrollTop);
-
+    textarea.addEventListener('scroll', () => {
+        mirror.scrollTop = textarea.scrollTop;   // Синхронизация вертикальной прокрутки
+        mirror.scrollLeft = textarea.scrollLeft; // Синхронизация горизонтальной прокрутки
+        syncMirror();                            // Обновление подсветки
+    });
     
 
     // Инициализация

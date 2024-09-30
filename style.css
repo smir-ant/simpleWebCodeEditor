@@ -4,25 +4,44 @@
 
 .container {
     position: relative;
-    width: fit-content;
+    width: 600px;
+    height: 200px;
 }
 
 .code {
     resize: none;
-    width: 500px;
-    height: 150px;
+    width: 100%;
+    height: 100%;
 
     margin: 0;
     padding: 15px;
     line-height: 1.5rem;
-    font-size: 1.25rem;
-    white-space: pre-wrap;
+    font-size: 1.1rem;
+    white-space: pre; /* Запрещаем перенос строк */
+    word-wrap: normal; /* Предотвращаем автоматический перенос слов */
 
-    background: transparent;
-    position: relative;
+    /* Отключаем эластичную прокрутку (оттягивание после максимальной прокрутки) */
+    overscroll-behavior: contain;
+    /* Отключаем плавную прокрутку. хотя вроде не влияет, но пусть будет */
+    scroll-behavior:auto; 
+    /* на firefox (на macos) прокрутка от краёв никак не синхронизируется и чисто визуально расходится */
+    /* так что решение №1) color: transparent; caret-color: xxx. Минус: цвет каретки под dark-reader и light/dark темы фиг подгонишь */
+    /* color: transparent;   */
+    /* caret-color: #ffcc00; */
+
+    /* решение №2) говорим firefox что заполнение текст не будет. минусов не будет. */
+    -webkit-text-fill-color: transparent;
+
+
+    outline: none;
+    border: 1px solid #80808040;
+
+    &:focus {
+        box-shadow: 0 0 5px #80808080; /* Добавляем тень */
+    }
 }
 
-/* невимая часть, которая всё подсвечивает находясь над textarea */
+/* невидимая часть, которая всё подсвечивает находясь над textarea */
 .mirror {
     position: absolute;
     top: 0;
@@ -38,20 +57,22 @@
     }
 
     & .string {
-        color: green;
+        color: #7ac44d;
     }
 
     & .keyword {
-        color:dodgerblue;
+        color: #478cd5;
     }
 
     & .function {
-        color:sandybrown;
+        color: #dd9672;
     }
 
-    & .variable {}
-    & .punctuation {}
-    & .number {}
-    & .operator {}
-    & .boolean {}
+    & .operator {
+        color:#BC89BD;
+    }
+    
+    & .boolean {
+        color: #e2c85d;
+    }
 }
