@@ -1,16 +1,67 @@
-<html>
-    <head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
         <meta charset="UTF-8">
         <meta viewport="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.min.css">
     </head>
     <body>
         <div id="container" class="container">
-            <textarea id="textarea" class="code" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false">SELECT * FROM tablename 
-WHERE id > 5;</textarea>
+            <textarea id="codeInput" class="code" autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false">DO $$
+/* Объявление переменной для хранения минимальной зарплаты */
+DECLARE 
+    min_salary INT := 50000;
+BEGIN
+    -- Выбираем сотрудников с зарплатой выше минимальной
+    PERFORM
+    SELECT 
+        e.employee_id,  -- ID сотрудника
+        e.first_name || ' ' || e.last_name AS full_name,  -- Полное имя (в PostgreSQL используется || для конкатенации)
+        e.salary,  -- Зарплата сотрудника
+        UPPER(d.department_name) AS department_name,  -- Название отдела в верхнем регистре
+        LENGTH(e.email) AS email_length,  -- Длина email
+
+        /* Булево значение: проверка, работает ли сотрудник в IT */
+        CASE 
+            WHEN d.department_name LIKE 'IT%' THEN TRUE  -- LIKE для проверки на принадлежность отделу IT (начинается с IT)
+            ELSE FALSE  -- false
+        END AS is_it_department,  -- Проверка на отдел IT
+
+        /* CASE для определения, больше ли зарплата среднего значения по отделу */
+        CASE 
+            WHEN e.salary > (SELECT AVG(e2.salary) FROM employees e2 WHERE e2.department_id = e.department_id)
+            THEN 'Above average'  -- Если зарплата больше средней по отделу
+            ELSE 'Below average'  -- Если зарплата меньше или равна средней
+        END AS salary_comparison,  -- Сравнение зарплаты с средней по отделу
+
+        /* Проверка, входит ли сотрудник в конкретные отделы */
+        CASE 
+            WHEN e.department_id IN (1, 2, 3) THEN 'Key Departments'  -- Если отдел входит в указанный список
+            ELSE 'Other Departments'  -- Иначе это другой отдел
+        END AS department_type,
+
+        /* Проверка зарплаты через BETWEEN */
+        CASE 
+            WHEN e.salary BETWEEN 60000 AND 100000 THEN 'Mid Range Salary'  -- Если зарплата в диапазоне
+            ELSE 'Other Salary Range'  -- Иначе другой диапазон
+        END AS salary_range
+
+    FROM 
+        employees e
+    JOIN 
+        departments d ON e.department_id = d.department_id
+    WHERE 
+        e.salary IS NOT NULL  -- Проверяем, что зарплата не NULL
+        AND e.salary > min_salary  -- Фильтрация по минимальной зарплате
+    ORDER BY 
+        e.salary DESC;  -- Сортировка по убыванию зарплаты
+END $$;</textarea>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-sql.min.js"></script>
+        <!-- sql в prism - это правила T-SQL -->
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-sql.min.js"></script> -->
+        <!-- а меня интересует postgresql (написано при помощи chatgpt, вроде косяки выправил что были, но не уверен что всё на 100% good пока что) -->
+         <script src="pgSQL.min.js"></script>
         <script src="script.min.js"></script>
     </body>
 </html>

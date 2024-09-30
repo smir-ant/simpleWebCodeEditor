@@ -7,7 +7,7 @@
 
 <details>
 <summary>
-<picture><img src="https://img.shields.io/badge/общий вес-7.7kB-blue.svg"></picture>
+<picture><img src="https://img.shields.io/badge/общий вес-7.5kB-blue.svg"></picture>
 </summary>
 <!-- Разграничитель -->
   <picture>
@@ -16,9 +16,7 @@
     <img height="0.8">
   </picture>
 
-  Из которых 5.5kB это prism (хоть на сайте и говорится про 2-2.5kb, ага)
-
-  Но всяко лучше, чем например <a href="https://highlightjs.org/">higlihts.js</a> с их .min весом 36kB. И это только для подсветки, мдыы...
+  Всяко лучше, чем например <a href="https://highlightjs.org/">higlihts.js</a> с их .min весом 36kB. И это только для подсветки, мдыы...
   
   Вес всех файлов после минификаций:
 
@@ -45,19 +43,45 @@
 - Поддержка <kbd>Tab</kbd> и <kbd>Shift+Tab</kbd>
 - Поддержка undo/redo. <sub>Хоть и за счёт использования execCommand, который считается deprecated. Однако аналогов пока нет (<a href="https://github.com/fregante/indent-textarea/issues/30">подробнее</a>). А свою микросистему с памятью через самодельный стек сомнительно внедрять...</sub>
 - Поддержка resize <sub>(убери resize:none из css)</sub>
-- Богатая система типов:
+- Богатая система классификации:
 
 | Класс            | Что это             | Пример(sql) |
 |------------------|---------------------|-------------|
 | `.comment`       | Комментарии         | --abc       |
 | `.string`        | Строки              | "abc"       |
 | `.keyword`       | Ключевые слова      | SELECT      |
-| `.variable`      | Переменные          | @age        |
-| `.punctuation`   | Пунктуация          | ()          |
+| `.punctuation`   | Пунктуация          | ;           |
 | `.number`        | Числа               | 123         |
 | `.operator`      | Оператор            | BETWEEN     |
 | `.boolean`       | Булевое значение    | FALSE       |
 | `.function`      | Функции             | COUNT(      |
+
+❗️ Но есть и множество других классов, например 
+
+```css
+.url, .property, .selector, .rule {/* в css, например */}
+
+.class-name, .regex {/* js. у regex кста есть и вложенные классы :) */}
+
+.attr-value, .attr-name {/* svg */}
+```
+
+> [!IMPORTANT]
+> js подключается как clike+js
+> ```html
+><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-clike.min.js"></script>
+><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/components/prism-javascript.min.js"></script>
+> ```
+>
+> об этом можно легко понять глянув на первые символы `prism-javascript.min.js`:
+> ```text
+> Prism.languages.javascript=Prism.languages.extend("clike"...)
+> ```
+
+---
+
+так как sql модуль prism это не про postgresql, то создал свой модуль `pgSQL.js` с регулярками через chatgpt, ошибки вроде выправил, но не факт что всё 100% идеально.
+
 ---
 
 ###### js uglified via https://www.uglifyjs.net/
