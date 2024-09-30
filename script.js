@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Функция копирования стилей
     const copyStyles = () => {
         const styles = window.getComputedStyle(textarea);
-        ['border', 'fontFamily', 'fontSize', 'fontWeight', 'lineHeight', 'padding', 'whiteSpace']
+        ['border', 'fontFamily', 'fontSize', 'fontWeight', 'lineHeight', 'padding', 'margin', 'whiteSpace', 'wordWrap']
             .forEach((prop) => mirror.style[prop] = styles[prop]);
         mirror.style.borderColor = 'transparent';
     };
