@@ -1,13 +1,11 @@
-# <ins>Простой</ins> <ins>крошечный</ins> <ins>встраиваемый</ins> редактор кода для <ins>любого языка</ins>
+# <ins>Simple</ins> <ins>tiny</ins> <ins>embedded</ins> code editor for <ins>any lang</ins>
 
-###### построено поверх <a href="https://prismjs.com/">prism.js</a>
-
-###### без npm и node.js 🗑️
+###### построено поверх <a href="https://prismjs.com/">prism.js</a> | без npm и node.js 🗑️
 
 
 <details>
 <summary>
-<picture><img src="https://img.shields.io/badge/общий вес-7.5kB-blue.svg"></picture>
+<picture><img src="https://img.shields.io/badge/full size-7.5kB-blue.svg"></picture>
 </summary>
 <!-- Разграничитель -->
   <picture>
@@ -37,11 +35,9 @@
 
 ### Функционал:
 
-- Подсветка любого языка. Как поменять? 
-    - изменить ссылку в index.html (prism-sql.min.js) 
-    - поменять sql на ваш язык внутри scripts.min.js</sub>
 - Поддержка <kbd>Tab</kbd> и <kbd>Shift+Tab</kbd>
-- Поддержка undo/redo. <sub>Хоть и за счёт использования execCommand, который считается deprecated. Однако аналогов пока нет (<a href="https://github.com/fregante/indent-textarea/issues/30">подробнее</a>). А свою микросистему с памятью через самодельный стек сомнительно внедрять...</sub>
+- Поддержка комментирования через hotkey <kbd>ctrl</kbd>+<kbd>/</kbd>
+- Поддержка UNDO/REDO (<kbd>ctrl</kbd>+<kbd>z</kbd> и <kbd>shift</kbd>+<kbd>ctrl</kbd>+<kbd>z</kbd>). <sub>Хоть и за счёт использования execCommand, который считается deprecated. Однако аналогов пока нет (<a href="https://github.com/fregante/indent-textarea/issues/30">подробнее</a>). А свою микросистему с памятью через самодельный стек сомнительно внедрять...</sub>
 - Поддержка resize <sub>(убери resize:none из css)</sub>
 - Богатая система классификации:
 
@@ -78,6 +74,12 @@
 > Prism.languages.javascript=Prism.languages.extend("clike"...)
 > ```
 
+
+### Подсветка любого языка. Как поменять:
+
+- изменить ссылку в index.html (prism-sql.min.js) 
+- поменять sql на ваш язык внутри scripts.min.js</sub>
+    
 ---
 
 так как sql модуль prism это не про postgresql, то создал свой модуль `pgSQL.js` с регулярками через chatgpt, ошибки вроде выправил, но не факт что всё 100% идеально.
