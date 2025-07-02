@@ -20,6 +20,11 @@
 
   <picture><img src="img/size.png"></picture>
 
+  Ну или применить сжатие, например brotli, то и того меньше, <strong>5.7kB</strong>:
+  
+  ![brotli](https://github.com/user-attachments/assets/ab10a94a-852b-40ee-a94b-207a8f79a4e2)
+
+
 
 <!-- Окончание -->
 <picture>
@@ -35,9 +40,9 @@
 
 ### Функционал:
 
-- Поддержка <kbd>Tab</kbd> и <kbd>Shift+Tab</kbd>
-- Поддержка комментирования через hotkey <kbd>ctrl</kbd>+<kbd>/</kbd>
-- Поддержка UNDO/REDO (<kbd>ctrl</kbd>+<kbd>z</kbd> и <kbd>shift</kbd>+<kbd>ctrl</kbd>+<kbd>z</kbd>). <sub>Хоть и за счёт использования execCommand, который считается deprecated. Однако аналогов пока нет (<a href="https://github.com/fregante/indent-textarea/issues/30">подробнее</a>). А свою микросистему с памятью через самодельный стек сомнительно внедрять...</sub>
+- <kbd>Tab</kbd> и <kbd>Shift + Tab</kbd> – Поддержка табуляции 
+- <kbd>Ctrl + /</kbd> – Поддержка комментирования через hotkey 
+- <kbd>Ctrl + Z</kbd> и <kbd>Shift + Ctrl + Z</kbd> – Поддержка undo/redo. <sub>Хоть и за счёт использования execCommand, который считается deprecated. Однако аналогов пока нет (<a href="https://github.com/fregante/indent-textarea/issues/30">подробнее</a>). А свою микросистему с памятью через самодельный стек сомнительно внедрять...</sub>
 - Поддержка resize <sub>(убери resize:none из css)</sub>
 - Богатая система классификации:
 
